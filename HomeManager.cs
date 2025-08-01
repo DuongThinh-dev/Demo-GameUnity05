@@ -107,4 +107,12 @@ public class HomeManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            hpHome--;
+        }
+    }
+
 }
