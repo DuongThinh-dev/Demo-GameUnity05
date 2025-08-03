@@ -184,65 +184,62 @@ public class Turret : MonoBehaviour
     {
         switch (towerType)
         {
-            // Tower1 - Sung lien thanh
-            case TowerType.Tower1:
+            case TowerType.Tower1: // Sung lien thanh
                 isExplosive = false;
-                buyPrice = 80;
+                buyPrice = 50;
                 switch (levelType)
                 {
                     case LevelType.Lv1:
                         damage = 10f;
                         fireTime = 0.8f;
-                        upgradePrice = 100;
-                        sellPrice = 50;
+                        upgradePrice = 70;
+                        sellPrice = 30;
                         rangeType = RangeType.near;
                         break;
                     case LevelType.Lv2:
                         damage = 15f;
                         fireTime = 0.7f;
-                        upgradePrice = 150;
-                        sellPrice = 70;
+                        upgradePrice = 90;
+                        sellPrice = 50;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv3:
                         damage = 22f;
                         fireTime = 0.6f;
                         upgradePrice = 0;
-                        sellPrice = 120;
+                        sellPrice = 70;
                         rangeType = RangeType.medium;
                         break;
                 }
                 break;
 
-            // Tower2 - Thap nguon (Sinh vang)
-            case TowerType.Tower2:
+            case TowerType.Tower2: // Thap nguon (sinh vang)
                 isExplosive = false;
-                buyPrice = 90;
+                buyPrice = 70;
                 switch (levelType)
                 {
                     case LevelType.Lv1:
                         goldPerTick = 4;
                         goldInterval = 6f;
-                        upgradePrice = 100;
-                        sellPrice = 60;
+                        upgradePrice = 90;
+                        sellPrice = 50;
                         break;
                     case LevelType.Lv2:
                         goldPerTick = 6;
                         goldInterval = 6f;
-                        upgradePrice = 150;
+                        upgradePrice = 110;
                         sellPrice = 70;
                         break;
                     case LevelType.Lv3:
                         goldPerTick = 8;
                         goldInterval = 5f;
                         upgradePrice = 0;
-                        sellPrice = 120;
+                        sellPrice = 90;
                         break;
                 }
                 break;
 
-            // Tower3 - Thap phao don muc tieu
-            case TowerType.Tower3:
+            case TowerType.Tower3: // Thap phao don muc tieu
                 isExplosive = false;
                 buyPrice = 100;
                 switch (levelType)
@@ -250,15 +247,15 @@ public class Turret : MonoBehaviour
                     case LevelType.Lv1:
                         damage = 35f;
                         fireTime = 3.0f;
-                        upgradePrice = 110;
-                        sellPrice = 70;
+                        upgradePrice = 120;
+                        sellPrice = 80;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv2:
                         damage = 55f;
                         fireTime = 2.7f;
-                        upgradePrice = 150;
-                        sellPrice = 80;
+                        upgradePrice = 140;
+                        sellPrice = 100;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv3:
@@ -271,8 +268,7 @@ public class Turret : MonoBehaviour
                 }
                 break;
 
-            // Tower4 - Thap dai bac (dien rong)
-            case TowerType.Tower4:
+            case TowerType.Tower4: // Thap phao dai bac (sat thuong lan)
                 isExplosive = true;
                 buyPrice = 120;
                 switch (levelType)
@@ -282,7 +278,7 @@ public class Turret : MonoBehaviour
                         fireTime = 3.5f;
                         explosionRadius = 1f;
                         upgradePrice = 140;
-                        sellPrice = 90;
+                        sellPrice = 100;
                         rangeType = RangeType.far;
                         break;
                     case LevelType.Lv2:
@@ -290,7 +286,7 @@ public class Turret : MonoBehaviour
                         fireTime = 3.0f;
                         explosionRadius = 1.25f;
                         upgradePrice = 160;
-                        sellPrice = 110;
+                        sellPrice = 120;
                         rangeType = RangeType.far;
                         break;
                     case LevelType.Lv3:
@@ -298,7 +294,7 @@ public class Turret : MonoBehaviour
                         fireTime = 2.5f;
                         explosionRadius = 1.5f;
                         upgradePrice = 0;
-                        sellPrice = 130;
+                        sellPrice = 140;
                         rangeType = RangeType.far;
                         break;
                 }

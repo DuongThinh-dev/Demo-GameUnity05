@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
         NodeUI.SetActive(false); // An NodeUI luc dau
         StopCanva.SetActive(false);
 
-        towerPrices = new int[] { 80, 90, 100, 120 };
-        trapPrices = new int[] { 50, 80, 100 };
+        towerPrices = new int[] { 50, 70, 100, 120 };
+        trapPrices = new int[] { 50, 50, 50 };
 
         textLevel.text = $"Level {curentLevel}";
     }
