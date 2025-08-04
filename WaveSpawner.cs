@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
 {   
     public Wave[] waves;// danh sach cac wave (gan tren Inspector)
     public Transform spawnPoint;
-    public float timeBetweenWaves = 3f;// thoi gian giua cac wave
+    public float timeBetweenWaves = 4f;// thoi gian giua cac wave
     public int currentWaveIndex = 0;
     public TextMeshProUGUI textWaves;
     public bool allWavesCompleted = false;
@@ -70,7 +70,7 @@ public class WaveSpawner : MonoBehaviour
     // sinh dot wave 
     IEnumerator SpawnWaves()
     {
-        yield return new WaitForSeconds(2f); // cho luc dau game
+        yield return new WaitForSeconds(5f); // cho luc dau game
 
         while (currentWaveIndex < waves.Length)
         {

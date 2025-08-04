@@ -60,7 +60,6 @@ public class Turret : MonoBehaviour
     {
         // Goi he thong quan ly vang de cong (gia dinh co GoldManager.Instance.AddGold(int amount))
         GoldManager.Instance.AddGold(goldPerTick);
-        Debug.Log($"[Tower2] Generated {goldPerTick} gold!");
     }
 
     // cap nhat muc tieu
@@ -190,21 +189,21 @@ public class Turret : MonoBehaviour
                 switch (levelType)
                 {
                     case LevelType.Lv1:
-                        damage = 10f;
+                        damage = 15f;
                         fireTime = 0.8f;
                         upgradePrice = 70;
                         sellPrice = 30;
                         rangeType = RangeType.near;
                         break;
                     case LevelType.Lv2:
-                        damage = 15f;
+                        damage = 20f;
                         fireTime = 0.7f;
                         upgradePrice = 90;
                         sellPrice = 50;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv3:
-                        damage = 22f;
+                        damage = 25f;
                         fireTime = 0.6f;
                         upgradePrice = 0;
                         sellPrice = 70;
@@ -302,8 +301,6 @@ public class Turret : MonoBehaviour
         }
 
         UpdateRangeFromRangeType();
-
-        Debug.Log(towerType.ToString() + " " + levelType.ToString());
     }
 
     public void Upgrade()
@@ -343,6 +340,4 @@ public class Turret : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-
 }

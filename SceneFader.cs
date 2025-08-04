@@ -15,17 +15,21 @@ public class SceneFader : MonoBehaviour
         StartCoroutine(FaceIn());
     }
 
-    IEnumerator FaceIn ()
+    IEnumerator FaceIn()
     {
-        float t = 1f;
+        float duration = 3f; // thoi gian fade in dai hon de muot
+        float t = 0f;
 
-        while (t > 0f)
+        while (t < duration)
         {
-            t -= Time.deltaTime;
-            img.color = new Color(0f, 0f, 0f, t);
-            yield return 0;
+            t += Time.deltaTime;
+            float alpha = Mathf.SmoothStep(1f, 0f, t / duration);// muot hon
+            img.color = new Color(0f, 0f, 0f, alpha);
+            yield return null;
         }
 
+        img.color = new Color(0f, 0f, 0f, 0f); // dam bao alpha = 0
         img.gameObject.SetActive(false);
     }
+
 }
