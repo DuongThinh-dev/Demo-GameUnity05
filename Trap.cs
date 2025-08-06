@@ -39,7 +39,7 @@ public class Trap : MonoBehaviour
 
             case TrapType.Freeze:
                 damage = 20;
-                effectDuration = 1.5f;
+                effectDuration = 0.75f;
                 trapPrice = 80;
                 break;
 
