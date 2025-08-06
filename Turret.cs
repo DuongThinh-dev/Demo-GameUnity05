@@ -305,19 +305,29 @@ public class Turret : MonoBehaviour
 
     public void Upgrade()
     {
+        if (IsMaxLevel()) return;
+
+        // Neu khong du vang -> khong nang cap
+        if (!GoldManager.Instance.TrySpendGold(upgradePrice))
+        {
+            return;
+        }
+
+        // Cap nhat cap do
         if (levelType == LevelType.Lv1) levelType = LevelType.Lv2;
         else if (levelType == LevelType.Lv2) levelType = LevelType.Lv3;
         else return;
 
-        CancelInvoke();   // Dung moi Invoke truoc
-        Tower();          // Gan lai chi so moi
+        CancelInvoke();   // Dung cac invoke cu
+        Tower();          // Cap nhat lai chi so theo cap do
 
-        // Goi lai dung theo loai thap
+        // Goi lai invoke phu hop theo loai thap
         if (towerType == TowerType.Tower2)
             InvokeRepeating(nameof(GenerateGold), goldInterval, goldInterval);
         else
             InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
     }
+
 
     public bool IsMaxLevel()
     {
