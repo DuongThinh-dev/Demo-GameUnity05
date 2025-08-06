@@ -40,6 +40,7 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 4f;// thoi gian giua cac wave
     public int currentWaveIndex = 0;
     public TextMeshProUGUI textWaves;
+    public TextMeshProUGUI textCountdown;
     public bool allWavesCompleted = false;
     public GameManager gameManager;
 
@@ -71,6 +72,7 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(5f); // cho luc dau game
+        textCountdown.text = "Game begin!";
 
         while (currentWaveIndex < waves.Length)
         {
@@ -85,13 +87,25 @@ public class WaveSpawner : MonoBehaviour
             // Bat dau dem nguoc khi khong con enemy
             float countdown = timeBetweenWaves;
             while (countdown > 0)
-            {   
+            {
+                if (currentWaveIndex == waves.Length)
+                {
+                    textCountdown.text = "All Waves completed!";
+                }
+                else
+                {
+                    textCountdown.text = "Next wave in: " + Mathf.Ceil(countdown).ToString() + "s";
+                }
+                
                 countdown -= Time.deltaTime;
                 yield return null;
             }
+            textCountdown.text = ""; // Xoa sau khi countdown ket thuc
+
         }
 
         allWavesCompleted = true;
+
         gameManager.WinLevel();
     }
 
