@@ -37,11 +37,11 @@ public class Trap : MonoBehaviour
                 trapPrice = 50;
                 break;
 
-            case TrapType.Freeze:
-                damage = 20;
-                effectDuration = 0.75f;
-                trapPrice = 80;
-                break;
+            //case TrapType.Freeze:
+            //    damage = 20;
+            //    effectDuration = 0.5f;
+            //    trapPrice = 80;
+            //    break;
 
             case TrapType.Bomb:
                 damage = 40;
@@ -99,11 +99,11 @@ public class Trap : MonoBehaviour
                     triggeredEnemy.Slow(0.6f, effectDuration); // Giam toc 40%
                 break;
 
-            case TrapType.Freeze:
-                triggeredEnemy.TakeDamage(damage);
-                if (triggeredEnemy.IsAlive())
-                    triggeredEnemy.Freeze(effectDuration); // Dong bang
-                break;
+            //case TrapType.Freeze:
+            //    triggeredEnemy.TakeDamage(damage);
+            //    if (triggeredEnemy.IsAlive())
+            //        triggeredEnemy.Freeze(effectDuration); // Dong bang
+            //    break;
         }
 
         if (gridSystem != null)

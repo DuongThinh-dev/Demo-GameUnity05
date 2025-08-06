@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Tower & Trap Prices")]
     public int[] towerPrices = new int[4];
-    public int[] trapPrices = new int[3];
+    public int[] trapPrices = new int[2];
 
     [Header("Tower Selection")]
     public LayerMask towerLayer; // Layer can kiem tra raycast
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         StopCanva.SetActive(false);
 
         towerPrices = new int[] { 50, 70, 100, 120 };
-        trapPrices = new int[] { 50, 50, 50 };
+        trapPrices = new int[] { 50, 50 };
 
         textLevel.text = $"Level {curentLevel}";
     }

@@ -5,7 +5,7 @@ public class GridSystem : MonoBehaviour
 {
     [Header("Trap Prefabs")]
     public GameObject Trap1;
-    public GameObject Trap2;
+    //public GameObject Trap2;
     public GameObject Trap3;
 
     [Header("Tower Prefabs")]
@@ -34,7 +34,7 @@ public class GridSystem : MonoBehaviour
     private void Start()
     {
         towerPrefabs = new GameObject[] { Tower1, Tower2, Tower3, Tower4 };
-        trapPrefabs = new GameObject[] { Trap1, Trap2, Trap3 };
+        trapPrefabs = new GameObject[] { Trap1, Trap3 };
         isPlacingTower = false;
         isPlacingTrap = false;
     }
