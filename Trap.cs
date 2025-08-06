@@ -96,7 +96,7 @@ public class Trap : MonoBehaviour
             case TrapType.Spike:
                 triggeredEnemy.TakeDamage(damage);
                 if (triggeredEnemy.IsAlive())
-                    triggeredEnemy.Slow(0.1f, effectDuration); // Giam toc 40%
+                    triggeredEnemy.Slow(0.2f, effectDuration); // Giam toc 80%
                 break;
 
             //case TrapType.Freeze:
