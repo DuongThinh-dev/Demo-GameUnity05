@@ -189,21 +189,21 @@ public class Turret : MonoBehaviour
                 switch (levelType)
                 {
                     case LevelType.Lv1:
-                        damage = 15f;
+                        damage = 20f;
                         fireTime = 0.8f;
                         upgradePrice = 70;
                         sellPrice = 30;
                         rangeType = RangeType.near;
                         break;
                     case LevelType.Lv2:
-                        damage = 20f;
+                        damage = 25f;
                         fireTime = 0.7f;
                         upgradePrice = 90;
                         sellPrice = 50;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv3:
-                        damage = 25f;
+                        damage = 30f;
                         fireTime = 0.6f;
                         upgradePrice = 0;
                         sellPrice = 70;
@@ -218,20 +218,20 @@ public class Turret : MonoBehaviour
                 switch (levelType)
                 {
                     case LevelType.Lv1:
-                        goldPerTick = 4;
-                        goldInterval = 6f;
+                        goldPerTick = 5;
+                        goldInterval = 5f;
                         upgradePrice = 90;
                         sellPrice = 50;
                         break;
                     case LevelType.Lv2:
-                        goldPerTick = 6;
-                        goldInterval = 6f;
+                        goldPerTick = 7;
+                        goldInterval = 4.5f;
                         upgradePrice = 110;
                         sellPrice = 70;
                         break;
                     case LevelType.Lv3:
-                        goldPerTick = 8;
-                        goldInterval = 5f;
+                        goldPerTick = 10;
+                        goldInterval = 4f;
                         upgradePrice = 0;
                         sellPrice = 90;
                         break;
@@ -244,22 +244,22 @@ public class Turret : MonoBehaviour
                 switch (levelType)
                 {
                     case LevelType.Lv1:
-                        damage = 35f;
-                        fireTime = 3.0f;
+                        damage = 45f;
+                        fireTime = 2.4f;
                         upgradePrice = 120;
                         sellPrice = 80;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv2:
-                        damage = 55f;
-                        fireTime = 2.7f;
+                        damage = 70f;
+                        fireTime = 2.0f;
                         upgradePrice = 140;
                         sellPrice = 100;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv3:
-                        damage = 75f;
-                        fireTime = 2.3f;
+                        damage = 100f;
+                        fireTime = 1.6f;
                         upgradePrice = 0;
                         sellPrice = 120;
                         rangeType = RangeType.medium;

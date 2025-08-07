@@ -70,8 +70,8 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyType.Dino_02: // Triceratops
                 speed = 1f;
-                maxHp = 160;
-                armor = 6;
+                maxHp = 120;
+                armor = 4;
                 rewardGold = 40;
                 break;
             case EnemyType.Dino_03: // Ankylosaurus
