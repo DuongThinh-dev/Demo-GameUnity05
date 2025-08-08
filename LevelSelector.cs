@@ -38,6 +38,6 @@ public class LevelSelector : MonoBehaviour
                 levelButtons[i].interactable = false;
         }
 
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
     }
 }
