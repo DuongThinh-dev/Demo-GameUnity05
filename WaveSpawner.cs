@@ -37,13 +37,13 @@ public class WaveSpawner : MonoBehaviour
 {   
     public Wave[] waves;// danh sach cac wave (gan tren Inspector)
     public Transform spawnPoint;
-    public float timeBetweenWaves = 4f;// thoi gian giua cac wave
     public int currentWaveIndex = 0;
     public TextMeshProUGUI textWaves;
     public TextMeshProUGUI textCountdown;
     public bool allWavesCompleted = false;
     public GameManager gameManager;
-
+    
+    private float timeBetweenWaves = 5f;// thoi gian giua cac wave
     void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();

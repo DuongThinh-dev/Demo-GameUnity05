@@ -11,7 +11,8 @@ public class HomeManager : MonoBehaviour
     public TextMeshProUGUI hpHomeText;
 
     [Header("Home Settings")]
-    public int hpHome = 25;
+    private int hpHome;
+    public int hpHomeMax = 15;
     private int lastHpValue;
     public bool gameEnded = false;
 
@@ -24,6 +25,8 @@ public class HomeManager : MonoBehaviour
 
     private void Start()
     {
+        hpHome = hpHomeMax;
+
         waveSpawner = FindAnyObjectByType<WaveSpawner>();
 
         backgroundPanel.SetActive(false);
@@ -67,7 +70,7 @@ public class HomeManager : MonoBehaviour
 
     private void UpdateHpUI()
     {
-        hpHomeText.text = $"Hp: {hpHome}/25";
+        hpHomeText.text = $"Hp: {hpHome}/{hpHomeMax}";
     }
 
     public void EndGame(bool isWin)

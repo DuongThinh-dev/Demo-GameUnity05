@@ -82,8 +82,8 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyType.Dino_04: // Stegosaurus
                 speed = 1f;
-                maxHp = 120;
-                armor = 6;
+                maxHp = 200;
+                armor = 8;
                 rewardGold = 40;
                 break;
             case EnemyType.Dino_05: // Pachycephalosaurus

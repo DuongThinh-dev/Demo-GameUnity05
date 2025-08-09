@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dino04_Stegosaurus : Enemy
 {
     public float debuffRadius = 2.5f;           // pham vi tac dong den turret
-    public float fireTimeIncreasePercent = 0.25f;
+    public float fireTimeIncreasePercent = 0.9f;
     public LayerMask towerLayer;
 
     private readonly List<Turret> affectedTurrets = new List<Turret>();
