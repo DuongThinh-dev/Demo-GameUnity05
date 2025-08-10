@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Dino06_Parasaurolophus : Enemy
 {
-    public float speedBoostMultiplier = 1.3f; // tang 30%
-    public float boostDuration = 2f;
+    public float speedBoostMultiplier = 1.9f; // tang 90%
+    public float boostDuration = 3f;
     public float cooldown = 6f;
 
     private bool canTriggerBoost = true; // Dam bao hieu ung khong kich hoat lien tuc

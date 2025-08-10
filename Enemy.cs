@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     protected Color originalColor;
     public Color frozenColor = Color.cyan;
     private Vector3 heathCanvaToEnemy;
-    private bool isFrozen = false;
+    //private bool isFrozen = false;
     private bool isSlowed = false;
     private GoldManager goldManager;
     private HomeManager homeManager;
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyType.Dino_03: // Ankylosaurus
                 speed = 1f;
-                maxHp = 200;
+                maxHp = 160;
                 armor = 10;
                 rewardGold = 40;
                 break;
@@ -183,36 +183,36 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Freeze(float duration)
-    {
-        if (!isFrozen) StartCoroutine(FreezeCoroutine(duration));
-    }
+    //public void Freeze(float duration)
+    //{
+    //    if (!isFrozen) StartCoroutine(FreezeCoroutine(duration));
+    //}
 
-    private IEnumerator FreezeCoroutine(float duration)
-    {
-        isFrozen = true;
-        float prevSpeed = speed;
-        speed = 0f;
+    //private IEnumerator FreezeCoroutine(float duration)
+    //{
+    //    isFrozen = true;
+    //    float prevSpeed = speed;
+    //    speed = 0f;
 
-        if (rend != null) rend.material.color = frozenColor;
-        if (anim != null)
-        {
-            anim.SetBool("isFrozen", true);
-            anim.speed = 0f;
-        }
+    //    if (rend != null) rend.material.color = frozenColor;
+    //    if (anim != null)
+    //    {
+    //        anim.SetBool("isFrozen", true);
+    //        anim.speed = 0f;
+    //    }
 
-        yield return new WaitForSeconds(duration);
+    //    yield return new WaitForSeconds(duration);
 
-        speed = prevSpeed;
-        if (rend != null) rend.material.color = originalColor;
-        if (anim != null)
-        {
-            anim.SetBool("isFrozen", false);
-            anim.speed = 1f;
-        }
+    //    speed = prevSpeed;
+    //    if (rend != null) rend.material.color = originalColor;
+    //    if (anim != null)
+    //    {
+    //        anim.SetBool("isFrozen", false);
+    //        anim.speed = 1f;
+    //    }
 
-        isFrozen = false;
-    }
+    //    isFrozen = false;
+    //}
 
     public void Slow(float multiplier, float duration)
     {

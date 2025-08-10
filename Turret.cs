@@ -244,21 +244,21 @@ public class Turret : MonoBehaviour
                 switch (levelType)
                 {
                     case LevelType.Lv1:
-                        damage = 38f;
+                        damage = 35f;
                         fireTime = 2.4f;
                         upgradePrice = 120;
                         sellPrice = 80;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv2:
-                        damage = 58f;
+                        damage = 55f;
                         fireTime = 2.0f;
                         upgradePrice = 140;
                         sellPrice = 100;
                         rangeType = RangeType.medium;
                         break;
                     case LevelType.Lv3:
-                        damage = 82f;
+                        damage = 80f;
                         fireTime = 1.6f;
                         upgradePrice = 0;
                         sellPrice = 120;
@@ -275,7 +275,7 @@ public class Turret : MonoBehaviour
                     case LevelType.Lv1:
                         damage = 25f;
                         fireTime = 3.5f;
-                        explosionRadius = 1f;
+                        explosionRadius = 1.2f;
                         upgradePrice = 140;
                         sellPrice = 100;
                         rangeType = RangeType.far;
@@ -283,7 +283,7 @@ public class Turret : MonoBehaviour
                     case LevelType.Lv2:
                         damage = 40f;
                         fireTime = 3.0f;
-                        explosionRadius = 1.25f;
+                        explosionRadius = 1.4f;
                         upgradePrice = 160;
                         sellPrice = 120;
                         rangeType = RangeType.far;
@@ -291,7 +291,7 @@ public class Turret : MonoBehaviour
                     case LevelType.Lv3:
                         damage = 60f;
                         fireTime = 2.5f;
-                        explosionRadius = 1.5f;
+                        explosionRadius = 1.75f;
                         upgradePrice = 0;
                         sellPrice = 140;
                         rangeType = RangeType.far;
