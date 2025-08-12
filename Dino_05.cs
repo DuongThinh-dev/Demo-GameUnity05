@@ -1,52 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class Dino05_Pachycephalosaurus : Enemy
 {
     public float invincibleDuration = 3.5f;
 
-    private bool hasTriggeredInvincibility = false;// Bien co de dam bao chi kich hoat 1 lan duy nhat
-    private bool isInvincible = false;// Bat/tat trang thai mien sat thuong
+    private bool hasTriggeredInvincibility = false; // Chi kich hoat 1 lan
+    private bool isInvincible = false;              // Dang trong trang thai mien sat thuong
+    private float invincibleTimer = 0f;             // Bo dem thoi gian
 
     protected override void ApplyPassive()
     {
-        // Passive duoc xu ly trong TakeDamage
+        // Passive xu ly trong TakeDamage
     }
 
     public override void TakeDamage(float dmg)
     {
-        // Neu dang bat tu -> khong nhan sat thuong
         if (isInvincible)
-        {
-            return;
-        }
+            return; // Dang bat tu thi bo qua sat thuong
 
-        // Neu mau duoi 50% va chua tung kich hoat bat tu -> kich hoat
-        if (!hasTriggeredInvincibility && hp <= maxHp * 0.5f)
+        if (!hasTriggeredInvincibility && hp <= maxHp * 0.5f && IsAlive())
         {
-            StartCoroutine(ActivateInvincibility());
-            return; // Khong nhan sat thuong tai frame nay
+            // Kich hoat bat tu
+            hasTriggeredInvincibility = true;
+            isInvincible = true;
+            invincibleTimer = invincibleDuration;
+
+            if (rend != null)
+                rend.material.color = Color.yellow;
+
+            return; // Frame nay khong nhan damage
         }
 
         base.TakeDamage(dmg);
     }
 
-    private IEnumerator ActivateInvincibility()
+    protected override void Update()
     {
-        hasTriggeredInvincibility = true;
-        isInvincible = true;
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer <= 0f)
+            {
+                isInvincible = false;
 
-        if (rend != null)
-            rend.material.color = Color.yellow;
+                if (rend != null)
+                    rend.material.color = originalColor;
+            }
+        }
+    }
 
-        yield return new WaitForSeconds(invincibleDuration);
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        // Reset khi bat lai object
+        isInvincible = false;
+        hasTriggeredInvincibility = false;
+        invincibleTimer = 0f;
 
         if (rend != null)
             rend.material.color = originalColor;
+    }
 
+    protected override void OnDisable()
+    {
+        // Reset khi tat object
         isInvincible = false;
+        hasTriggeredInvincibility = false;
+        invincibleTimer = 0f;
+
+        if (rend != null)
+            rend.material.color = originalColor;
     }
 }
-

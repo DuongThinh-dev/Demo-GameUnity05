@@ -29,16 +29,16 @@ public class Dino11_Spinosaurus : Enemy
         if (isSwimming)
         {
             speed = originalSpeed * 1.5f;
-            armor = baseArmor * 1.3f;
+            armor = baseArmor * 1.5f;
         }
         else
         {
             speed = originalSpeed;
-            armor = baseArmor * 1.2f;
+            armor = baseArmor * 1.4f;
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
         CheckEnvironment();
 

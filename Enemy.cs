@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyType enemyType;
 
-    [Header("Imformation Dino")]
+    [Header("Information Dino")]
     public float speed; // toc do hien tai
     public float maxHp;
     public float armor;
@@ -26,8 +25,10 @@ public class Enemy : MonoBehaviour
     protected Color originalColor;
     public Color frozenColor = Color.cyan;
     private Vector3 heathCanvaToEnemy;
-    //private bool isFrozen = false;
     private bool isSlowed = false;
+    private float slowTimer = 0f;
+    private float slowMultiplier = 1f;
+
     private GoldManager goldManager;
     private HomeManager homeManager;
 
@@ -46,7 +47,6 @@ public class Enemy : MonoBehaviour
 
         anim = GetComponent<Animator>();
 
-        // Ap dung noi tai khi kich hoat lai
         ApplyPassive();
     }
 
@@ -62,72 +62,17 @@ public class Enemy : MonoBehaviour
     {
         switch (enemyType)
         {
-            case EnemyType.Dino_01: // Velociraptor
-                speed = 2f;
-                maxHp = 40;
-                armor = 0;
-                rewardGold = 20;
-                break;
-            case EnemyType.Dino_02: // Triceratops
-                speed = 1f;
-                maxHp = 120;
-                armor = 4;
-                rewardGold = 40;
-                break;
-            case EnemyType.Dino_03: // Ankylosaurus
-                speed = 1f;
-                maxHp = 160;
-                armor = 10;
-                rewardGold = 40;
-                break;
-            case EnemyType.Dino_04: // Stegosaurus
-                speed = 1f;
-                maxHp = 200;
-                armor = 8;
-                rewardGold = 40;
-                break;
-            case EnemyType.Dino_05: // Pachycephalosaurus
-                speed = 1.5f;
-                maxHp = 80;
-                armor = 4;
-                rewardGold = 30;
-                break;
-            case EnemyType.Dino_06: // Parasaurolophus
-                speed = 1.5f;
-                maxHp = 80;
-                armor = 4;
-                rewardGold = 30;
-                break;
-            case EnemyType.Dino_07: // Brachiosaurus
-                speed = 1f;
-                maxHp = 200;
-                armor = 8;
-                rewardGold = 50;
-                break;
-            case EnemyType.Dino_08: // Tyrannosaurus Rex
-                speed = 1.5f;
-                maxHp = 160;
-                armor = 6;
-                rewardGold = 50;
-                break;
-            case EnemyType.Dino_09: // Pteranodon
-                speed = 2f;
-                maxHp = 40;
-                armor = 2;
-                rewardGold = 30;
-                break;
-            case EnemyType.Dino_10: // Hatzegopteryx
-                speed = 1.5f;
-                maxHp = 120;
-                armor = 6;
-                rewardGold = 50;
-                break;
-            case EnemyType.Dino_11: // Spinosaurus
-                speed = 1.5f;
-                maxHp = 160;
-                armor = 8;
-                rewardGold = 50;
-                break;
+            case EnemyType.Dino_01: speed = 2f; maxHp = 40; armor = 0; rewardGold = 20; break;
+            case EnemyType.Dino_02: speed = 1f; maxHp = 120; armor = 4; rewardGold = 40; break;
+            case EnemyType.Dino_03: speed = 1f; maxHp = 160; armor = 10; rewardGold = 40; break;
+            case EnemyType.Dino_04: speed = 1f; maxHp = 200; armor = 8; rewardGold = 40; break;
+            case EnemyType.Dino_05: speed = 1.5f; maxHp = 80; armor = 4; rewardGold = 30; break;
+            case EnemyType.Dino_06: speed = 1.5f; maxHp = 80; armor = 4; rewardGold = 30; break;
+            case EnemyType.Dino_07: speed = 1f; maxHp = 200; armor = 8; rewardGold = 50; break;
+            case EnemyType.Dino_08: speed = 1.5f; maxHp = 160; armor = 6; rewardGold = 50; break;
+            case EnemyType.Dino_09: speed = 2f; maxHp = 40; armor = 2; rewardGold = 30; break;
+            case EnemyType.Dino_10: speed = 1.5f; maxHp = 120; armor = 6; rewardGold = 50; break;
+            case EnemyType.Dino_11: speed = 1.5f; maxHp = 160; armor = 8; rewardGold = 50; break;
         }
 
         hp = maxHp;
@@ -151,16 +96,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected virtual void Update()
+    {
+        // Quan ly slow khong dung coroutine
+        if (isSlowed)
+        {
+            slowTimer -= Time.deltaTime;
+            if (slowTimer <= 0f)
+            {
+                // Het slow -> tra ve toc do goc
+                speed = originalSpeed;
+                isSlowed = false;
+            }
+        }
+    }
+
     protected virtual void OnDisable()
     {
-        // Neu can, ban co the reset hieu ung slow, freeze tai day
+        isSlowed = false;
+        slowTimer = 0f;
+        speed = originalSpeed;
     }
 
     public virtual void TakeDamage(float dmg)
     {
         float actualDamage = Mathf.Max(dmg - armor, 1f);
         hp -= actualDamage;
-
         UpdateHPBar();
 
         if (hp <= 0f)
@@ -183,50 +144,12 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    //public void Freeze(float duration)
-    //{
-    //    if (!isFrozen) StartCoroutine(FreezeCoroutine(duration));
-    //}
-
-    //private IEnumerator FreezeCoroutine(float duration)
-    //{
-    //    isFrozen = true;
-    //    float prevSpeed = speed;
-    //    speed = 0f;
-
-    //    if (rend != null) rend.material.color = frozenColor;
-    //    if (anim != null)
-    //    {
-    //        anim.SetBool("isFrozen", true);
-    //        anim.speed = 0f;
-    //    }
-
-    //    yield return new WaitForSeconds(duration);
-
-    //    speed = prevSpeed;
-    //    if (rend != null) rend.material.color = originalColor;
-    //    if (anim != null)
-    //    {
-    //        anim.SetBool("isFrozen", false);
-    //        anim.speed = 1f;
-    //    }
-
-    //    isFrozen = false;
-    //}
-
     public void Slow(float multiplier, float duration)
     {
-        if (!isSlowed) StartCoroutine(SlowCoroutine(multiplier, duration));
-    }
-
-    private IEnumerator SlowCoroutine(float multiplier, float duration)
-    {
+        // Neu chua bi slow hoac muon lam moi slow
         isSlowed = true;
-        float oldSpeed = speed;
-        speed *= multiplier;
-        yield return new WaitForSeconds(duration);
-        speed = oldSpeed;
-        isSlowed = false;
+        slowMultiplier = multiplier;
+        slowTimer = duration;
+        speed = originalSpeed * multiplier;
     }
-
 }

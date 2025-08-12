@@ -21,7 +21,7 @@ public class Dino10_Hatzegopteryx : Enemy
         UpdateAnimator();
     }
 
-    private void Update()
+    protected override void Update()
     {
         CheckLandingWithOverlap();
 

@@ -1,78 +1,92 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dino08_Trex : Enemy
 {
-    // (Optional) Hieu ung hoi sinh
     [SerializeField] private GameObject reviveEffectPrefab;
 
-    public float reviveHealthPercent = 0.5f; // luong mau sau hoi sinh
+    public float reviveHealthPercent = 0.5f; // phan tram mau khi hoi sinh
+    public float reviveDelay = 1.5f;         // thoi gian cho hoi sinh
 
-    private bool hasRevived = false; // Da duoc hoi sinh chua
-    private bool isReviving = false; // Trang thai dang hoi sinh
+    private bool hasRevived = false;         // da hoi sinh chua
+    private bool isReviving = false;         // dang hoi sinh
+    private float reviveTimer = 0f;          // bo dem thoi gian hoi sinh
+    private Collider myCollider;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        hasRevived = false;
+        isReviving = false;
+        reviveTimer = 0f;
+        speed = originalSpeed;
+
+        if (myCollider == null)
+            myCollider = GetComponent<Collider>();
+    }
 
     protected override void Die()
     {
-        // Neu chua hoi sinh thi hoi sinh
         if (!hasRevived)
         {
+            // bat dau trang thai hoi sinh
             hasRevived = true;
             isReviving = true;
+            reviveTimer = reviveDelay;
 
-            // Neu co animation hay hieu ung delay, ban co the cho 0.5s truoc khi cho di tiep
-            StartCoroutine(ReviveDelay());
+            // dung di chuyen va vo hieu collider
+            speed = 0f;
+            if (myCollider != null) myCollider.enabled = false;
+
+            // hoi mau ngay lap tuc
+            hp = maxHp * reviveHealthPercent;
+            UpdateHPBar();
+
+            // trigger animation revive neu co
+            if (anim != null && anim.isActiveAndEnabled)
+                anim.SetTrigger("reviveTrigger");
 
             return;
         }
 
-        // Neu da hoi sinh 1 lan -> chet that
-        base.Die();
+        base.Die(); // da hoi sinh roi => chet han
     }
 
     public override void TakeDamage(float dmg)
     {
-        if (isReviving)
-        {
-            return;
-        }
-
-        base.TakeDamage(dmg); // Goi logic mac dinh
+        if (isReviving) return; // mien nhiem khi dang hoi sinh
+        base.TakeDamage(dmg);
     }
 
-    private IEnumerator ReviveDelay()
+    protected override void Update()
     {
-        speed = 0f;
-
-        // Hoi mau ngay lap tuc (de thanh mau kip cap nhat)
-        hp = maxHp * reviveHealthPercent;
-        UpdateHPBar(); // goi lai thanh mau neu can
-
-        if (anim != null) anim.SetTrigger("reviveTrigger");
-
-        yield return new WaitForSeconds(1.5f);
-
-        speed = originalSpeed;
-        isReviving = false;
-
-        // Co the them hieu ung hoi sinh tai day
-        if (reviveEffectPrefab != null)
+        if (isReviving)
         {
-            Instantiate(reviveEffectPrefab, transform.position, Quaternion.identity);
+            reviveTimer -= Time.deltaTime;
+            if (reviveTimer <= 0f)
+            {
+                // ket thuc hoi sinh
+                isReviving = false;
+                speed = originalSpeed;
+                if (myCollider != null) myCollider.enabled = true;
+
+                // hieu ung hoi sinh
+                if (reviveEffectPrefab != null)
+                    Instantiate(reviveEffectPrefab, transform.position, Quaternion.identity);
+
+                // dam bao animation chay lai
+                if (anim != null && anim.isActiveAndEnabled)
+                    anim.Play("Run_08");
+            }
         }
-
-        // Bat buoc ve lai chay neu trigger khong kip kich hoat
-        if (anim != null) anim.Play("Run_08");
-
     }
 
     protected override void OnDisable()
     {
-        base.OnDisable();
-        // Reset neu enemy duoc tai su dung (vi du qua object pooling)
         hasRevived = false;
         isReviving = false;
+        reviveTimer = 0f;
         speed = originalSpeed;
 
+        base.OnDisable();
     }
 }

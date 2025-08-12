@@ -168,10 +168,10 @@ public class Turret : MonoBehaviour
         switch (rangeType)
         {
             case RangeType.near:
-                range = 1.5f;
+                range = 2.0f;
                 break;
             case RangeType.medium:
-                range = 2.0f;
+                range = 2.25f;
                 break;
             case RangeType.far:
                 range = 2.5f;
