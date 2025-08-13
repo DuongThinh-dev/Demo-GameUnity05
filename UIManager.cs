@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    //public string LevelToLoad = "GamePlay";
-
-
-
     public void Play()
     {
         SceneManager.LoadScene("Level Select");
@@ -17,6 +13,11 @@ public class UIManager : MonoBehaviour
     public void LoadToSceneMainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void LoadToSceneTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void LoadToSceneLevel(string level)
